@@ -39,6 +39,7 @@ const createSlackMessage = (question) => ({
 
 app.post('/question', (req, res) => {
   const { question, url } = req.body
+  console.log(req.body)
 
   // post message to slack
   request
