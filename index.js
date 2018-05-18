@@ -14,7 +14,6 @@ const createSlackMessage = (question) => ({
   "text": question,
   "attachments": [
   {
-    "text": question,
     "fallback": "You are unable to vote",
     "callback_id": "yay_nay",
     "color": "#3AA3E3",
@@ -38,8 +37,7 @@ const createSlackMessage = (question) => ({
 })
 
 app.post('/question', (req, res) => {
-  const { question, url } = req.body
-  console.log(req.body)
+  const { question, url } = req
 
   // post message to slack
   request
