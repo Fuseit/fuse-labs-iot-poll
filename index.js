@@ -14,7 +14,7 @@ const createSlackMessage = (question) => ({
   "text": question,
   "attachments": [
   {
-    // "text": "grubs up :pizza:",
+    "text": question,
     "fallback": "You are unable to vote",
     "callback_id": "yay_nay",
     "color": "#3AA3E3",
