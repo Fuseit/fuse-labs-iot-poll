@@ -44,7 +44,7 @@ app.post('/question', (req, res) => {
   // post message to slack
   request
     .post({
-      url: url || 'https://hooks.slack.com/services/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',
+      url: url || 'https://hooks.slack.com/services/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',
       form: JSON.stringify(createSlackMessage(question))
     })
     .then(response => {
