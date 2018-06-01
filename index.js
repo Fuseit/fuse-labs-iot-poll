@@ -1,7 +1,13 @@
 const express = require('express')
-const app = express()
 var request = require('request-promise');
 var bodyParser = require('body-parser')
+
+var {mongoose} = require('./db/mongoose');
+var {Poll} = require('./models/poll')
+
+const port = process.env.PORT || 3002;
+const app = express()
+
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -36,6 +42,7 @@ const createSlackMessage = (question) => ({
 ]
 })
 
+/* handlers for the urls */
 app.post('/question', (req, res) => {
   const { question, url } = req.body
   // post message to slack
@@ -60,9 +67,44 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  const result = JSON.parse(req.body.payload).actions[0].value
-  if(result === 'a') a++
-  if(result === 'b') b++
+    const result = JSON.parse(req.body.payload).actions[0].value
+    if(result === 'a') a++
+    if(result === 'b') b++
 })
 
-app.listen(process.env.PORT || 3000, () => console.log('Example app listening on port 3000!'))
+app.get('/create_poll', (req, res) => {
+    // send a header
+    res.send({
+        "label": "Email Address",
+        "name": "email",
+        "type": "text",
+        "subtype": "email",
+        "placeholder": "you@example.com"
+    })
+});
+
+app.use(bodyParser.json());
+
+app.post('/create_poll', (req, res) => {
+    var poll = new Poll({
+        label: req.body.label,
+        name: req.body.name,
+        type: req.body.type,
+        subtype: req.body.subtype,
+        placeholder: req.body.placeholder
+    });
+
+    poll.save().then((doc) => {
+        res.send(doc);
+    }, (error) => {
+        res.status(400).send(error);
+    });
+});
+
+app.get('/notfound', (req, res) => {
+    res.send({
+        errorMessage: 'Unable to send request'
+    });
+})
+
+app.listen(port, () => console.log(`Example app listening on port ${port}`))
