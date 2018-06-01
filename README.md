@@ -1,17 +1,17 @@
 ## config local mongoDB
-#### download mongoDB: https://www.mongodb.com/download-center#community
+#### 1- download mongoDB: https://www.mongodb.com/download-center#community
 
-#### unpack the zip folder, rename it to mongo add place it in the user directory
+#### 2- unpack the zip folder, rename it to mongo add place it in the user directory
 
-#### create the data directory
+#### 3- create the data directory
 > mkdir ~/mongo-data
 
-#### go to directory and run the db
+#### 4- go to directory and run the db
 > cd ~/mongo/bin
 
 > ./mongod --dbpath ~/mongo-data
 
-#### access mongo db shell
+#### 5- access mongo db shell
 > ./mongo
 
 > show dbs \
