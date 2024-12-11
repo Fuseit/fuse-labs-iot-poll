@@ -1,3 +1,6 @@
+> [!WARNING]
+> This repo is not in use and has been deprecated. It will eventually be deleted.
+
 ## config local mongoDB
 #### 1- download mongoDB: https://www.mongodb.com/download-center#community
 
